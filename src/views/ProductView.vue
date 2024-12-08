@@ -23,42 +23,44 @@
             placeholder="Поиск блюд и ресторанов"
         >
       </div>
-      <div class="products-wrapper" id="rests-container">
-        <router-link
-            class="products-card"
-            v-for="rest in restsArray"
-            :key="rest.id"
-            :to="`/rest?id=${rest.id}`"
-        >
+      <div class="products-wrapper" id="goods-container">
+        <div class="products-card" v-for="good in goodsArray" :key="good.id">
           <div class="products-card__image">
-            <img :src="getUrl(rest.image)" :alt="rest.image">
+            <img :src="getUrl(good.image)" :alt="good.image">
           </div>
           <div class="products-card__description">
             <div class="products-card__description-row">
-              <h4 class="products-card__description--title">{{ rest.title }}</h4>
-              <div class="products-card__description--badge">{{ rest.time }}</div>
+              <h5 class="products-card__description--name">
+                {{ good.title }}
+              </h5>
             </div>
             <div class="products-card__description-row">
-              <div class="products-card__description-info">
-                <div class="products-card__description-info--raiting">
-                  <img src="../assets/images/icons/star.svg" alt="star">
-                  {{ rest.rating }}
-                </div>
-                <div class="products-card__description-info--price">От {{ rest.price }} ₽</div>
-                <div class="products-card__description-info--group">{{ rest.type }}</div>
+              <p class="products-card__description--text">
+                {{ good.description }}
+              </p>
+            </div>
+            <div class="products-card__description-row">
+              <div class="products-card__description-controls">
+                <button class="btn btn-primary">
+                  В корзину
+                  <img src="../assets/images/icons/shopping-cart-white.svg" alt="shopping-cart-white">
+                </button>
+                <span class="products-card__description-controls--price">
+                    {{ good.price }} ₽
+                </span>
               </div>
             </div>
           </div>
-        </router-link>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import {restsArray} from '../constants/rests.js'
+import {goodsArray} from '../constants/goods.js'
 
 const getUrl = (name) => {
-  return new URL(`../assets/images/rests/${name}.jpg`, import.meta.url)
+  return new URL(`../assets/images/goods/${name}.jpg`, import.meta.url)
 }
 </script>
