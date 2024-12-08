@@ -2,20 +2,18 @@
 import Footer from "@/components/Footer.vue";
 import Header from "@/components/Header.vue";
 import Modal from "@/components/Modal.vue";
-import {ref} from "vue";
-
-const isOpen = ref(false);
+import {store} from "@/store/index.js";
 </script>
 
 <template>
   <div class="page-wrapper">
-    <Header @toggle-modal="isOpen = !isOpen"/>
+    <Header @toggle-modal="store.toggleModal(true)"/>
 
     <main class="main">
       <router-view></router-view>
     </main>
 
-    <Modal :isOpen="isOpen" @toggle-modal="isOpen = !isOpen"/>
+    <Modal :isOpen="store.isOpen" @toggleModal="store.toggleModal(false)"/>
     <Footer />
   </div>
 </template>
